@@ -49,5 +49,5 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           name: linux
-          tag_name: ${{ echo $NOW }}
+          tag_name: ${{env.NOW }}
           files: src/dist/*
