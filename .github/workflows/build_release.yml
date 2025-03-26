@@ -43,4 +43,5 @@ jobs:
         with:
           name: linux
           tag_name: ${{ github.ref }}
+          target_commitish: ${{ github.sha }}
           files: src/dist/*
