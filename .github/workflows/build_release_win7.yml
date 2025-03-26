@@ -27,9 +27,9 @@ jobs:
         run: |
           echo "RELEASE_DATE=$(date --rfc-3339=date)" >> ${GITHUB_ENV}
 
-      - name: cleanup
-        run:  |
-          Get-Package "*python*" | Uninstall-Package
+      # - name: cleanup
+      #   run:  |
+      #     Get-Package "*python*" | Uninstall-Package
 
       - name: install custom py
         shell: bash
@@ -37,10 +37,11 @@ jobs:
           curl -kLSs https://github.com/adang1345/PythonWin7/raw/refs/heads/master/3.10.16/python-3.10.16-embed-amd64.zip -o python.zip
           unzip python.zip
 
-      - uses: pypa/gh-action-pip-audit@v1.1.0
-        with:
-          inputs: requirements.txt
-          local: true
+      - name: pip audit
+        shell: bash
+        run: |
+          python3 -m pip install pip-audit
+          pip-audit -r requirements.txt 
 
       - name: Build
         shell: bash
