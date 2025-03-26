@@ -28,7 +28,7 @@ jobs:
       - name: set release date
         shell: bash
         run: |
-          echo "RELEASE_DATE=$(date --rfc-3339=date)" >> ${GITHUB_ENV}
+          echo "RELEASE_DATE=$( date "+%Y-%m-%d")" >> ${GITHUB_ENV}
 
       ## The list of all available versions can be found here: https://raw.githubusercontent.com/actions/python-versions/main/versions-manifest.json
       - uses: actions/setup-python@v5
