@@ -31,8 +31,9 @@ In practice I have tested it up to 2 hours with 16 channels.
 1. enjoy the recording:
 
 <p align="center">
-  <img src="assets/demo.webm" alt="app running" />
+  <img src="assets/demo.gif" alt="app running" />
 </p>
+
 1. when done, click the button again to stop
 
 In the same folder where the app is located, an audio file will be created. It is a multichannel .ogg file.
