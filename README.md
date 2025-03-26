@@ -29,21 +29,21 @@ In practice I have tested it up to 2 hours with 16 channels.
 1. choose your device
 1. click the big button REC
 1. enjoy the recording:
-
 <p align="center">
   <img src="assets/demo.gif" alt="app running" />
 </p>
 
-1. when done, click the button again to stop
+When done, click the button again to stop. In the same folder where the app is located, an audio file will be created. It is a multichannel .ogg file.
 
-In the same folder where the app is located, an audio file will be created. It is a multichannel .ogg file.
-
-# how to install from releases
+# how to download / install 
 
 
-# how to run from source
 
-## linux
+# for developers
+
+## how to run from source
+
+### linux
 
     python -m venv easy_mtr
     . easy_mtr/bin/activate
@@ -52,7 +52,7 @@ In the same folder where the app is located, an audio file will be created. It i
     cd src
     python easy_multitrack_recorder.py
 
-## windows
+### windows
 
     python -m venv easy_mtr
     audioenv\Scripts\activate
@@ -61,13 +61,15 @@ In the same folder where the app is located, an audio file will be created. It i
     cd src
     python easy_multitrack_recorder.py
 
-## mac 
+### mac 
 
 follow the same instructions as per Linux. If you get issues, please open a ticket
 
-# how to build from source
+## how to build from source
 
 first install (see above), then:
 
     cd src
     pyinstaller -F easy_multitrack_recorder.py --add-data "assets/*:assets" --icon "assets/icon.ico"
+
+For additional info , check the source code of the repo github actions 
