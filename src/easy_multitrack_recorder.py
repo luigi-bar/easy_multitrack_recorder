@@ -23,6 +23,7 @@ if __name__ == "__main__":
     logging.info("EASY MULTITRACK RECORDING Starting")
     ui = EasyMTRui()
     
+    # set dark theme but skip if not working (win7...)
     try:
         sv_ttk.set_theme("dark")
     except:

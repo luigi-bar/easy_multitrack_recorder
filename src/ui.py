@@ -22,7 +22,8 @@ class EasyMTRui:
 
     def __init__(self):
         self.window = tk.Tk()
-
+#        self.window.configure(background='#1c1c1c')
+        
         self.window.title("EASY MULTITRACK RECORDER")
         self.all_audio_devices = AudioDevice.query_devices()
         self.recording_start = None
@@ -46,6 +47,13 @@ class EasyMTRui:
             sys.exit(0) ## bye bye.
 
     def mainloop(self):
+        """
+        Starts the main event loop of the Tkinter application.
+
+        This method is responsible for running the Tkinter event loop,
+        which keeps the application responsive and handles user interactions
+        until the application is closed.
+        """
         self.window.mainloop()
         
     vuTicks=20
@@ -53,17 +61,33 @@ class EasyMTRui:
     vuTicksY=5
     vuTicksR=3
     
+    
     def getasset(self, resource):
+        """
+        Retrieves the absolute path of a resource file located within the application's bundle directory.
+
+        Args:
+            resource (str): The name of the resource file to retrieve.
+
+        Returns:
+            str: The absolute path to the resource file.
+        """
+    
         bundledir=os.path.abspath(os.path.dirname(__file__))
         return os.path.join(bundledir,resource)
 
     def create_ui(self):
+        """
+        Creates and configures the user interface elements of the application.
+
+        This method sets up the layout, widgets, and initial state of the UI.
+        """
 
         ## nice logo
-        logoframe=tk.Frame(self.window)
+        logoframe=tk.Frame(self.window, background='black')
         logoframe.grid(row=1,column=0, columnspan=10) 
 
-        ttk.Label(logoframe, text="EASY MULTITRACK RECORDER",   font=('TkFixedFont',20)).grid(
+        ttk.Label(logoframe, text="EASY MULTITRACK RECORDER",   font=('TkFixedFont',20), background='black', foreground='white').grid(
             row=1, column=2, padx=self.padding, pady=0
         )
         ttk.Label(logoframe, text='  '.join("multitrack recording made simple"),   font=('TkFixedFont',8)).grid(
@@ -75,7 +99,7 @@ class EasyMTRui:
 
 
         # Device: label
-        ttk.Label(self.window, text="Device:",   font='TkFixedFont').grid(
+        ttk.Label(self.window, text="Device:",   font='TkFixedFont', background='black', foreground='white').grid(
             row=5, column=0, padx=self.padding, pady=self.padding
         )
 
@@ -102,34 +126,42 @@ class EasyMTRui:
             row=5, column=40, padx=self.padding, pady=self.padding, columnspan=2)
 
         ## vumeters
-        vuframe=tk.Frame(self.window)
+        vuframe=tk.Frame(self.window, background='black')
         vuframe.grid(row=21,column=1)
 
-        self.levels=ttk.Label(vuframe, text="",  font='TkFixedFont')
+        self.levels=ttk.Label(vuframe, text="",  font='TkFixedFont', background='black', foreground='white')
         self.levels.grid(
             row=21, column=1, padx=0, pady=self.padding
         )
-        self.levelsY=ttk.Label(vuframe, text="",  font='TkFixedFont', foreground='#F80')
+        self.levelsY=ttk.Label(vuframe, text="",  font='TkFixedFont', foreground='#F80', background='black')
         self.levelsY.grid(
             row=21, column=2, padx=0, pady=self.padding
         )
         
-        self.levelsR=ttk.Label(vuframe, text="",  font='TkFixedFont', foreground='#F00')
+        self.levelsR=ttk.Label(vuframe, text="",  font='TkFixedFont', foreground='#F00', background='black')
         self.levelsR.grid(
             row=21, column=3, padx=0, pady=self.padding
         )
-        self.levelsEND=ttk.Label(vuframe, text="",  font='TkFixedFont')
+        self.levelsEND=ttk.Label(vuframe, text="",  font='TkFixedFont', background='black', foreground='white')
         self.levelsEND.grid(
             row=21, column=4, padx=0, pady=self.padding
         )
-
-        self.recinfo_label = ttk.Label(self.window, text="",  font='TkFixedFont')
+        self.recinfo_label = ttk.Label(self.window, text="",  font='TkFixedFont', background='black', foreground='white')
         self.recinfo_label.grid(
             row=21, column=2, padx=self.padding, pady=self.padding)
         
         self.set_recordbutton_image(False)
 
     def set_recordbutton_image(self,is_recording):
+        """
+        Sets the image of the record button based on the recording state.
+
+        Args:
+            is_recording (bool): True if recording is in progress, False otherwise.
+
+        This method updates the record button's image to reflect whether the
+        application is currently recording or not.
+        """
         if self.image_recF  is None:
             self.image_recF = tk.PhotoImage(file=self.getasset("assets/recF.png"))
         if self.image_recT0  is None:
@@ -151,6 +183,13 @@ class EasyMTRui:
 
 
     def update_recinfo_label(self):
+        """
+        Updates the recording information label with current recording details.
+
+        This method updates the label with information such as recording duration,
+        filename, file size, and disk usage. It is called periodically during
+        recording to keep the information up-to-date.
+        """
         if self.recording_start is not None:
             now = time.time()
             delta = int(now - self.recording_start)
@@ -178,6 +217,13 @@ class EasyMTRui:
             self.set_recordbutton_image(True) ## blinking
 
     def update_levels(self):
+        """
+        Updates the VU meter levels based on the audio input.
+
+        This method retrieves the latest audio levels from the recorder,
+        calculates the VU meter display, and updates the UI accordingly.
+        It is called periodically during recording.
+        """
         if self.recording_start is None:
             return
         
@@ -237,6 +283,13 @@ class EasyMTRui:
 
 
     def record_startstop(self):
+        """
+        Starts or stops the audio recording process.
+
+        This method toggles the recording state. If recording is not in progress,
+        it starts recording. If recording is in progress, it stops recording.
+        It also updates the UI to reflect the current recording state.
+        """
         if self.recording_start is None:
 
             if self.devicechoosen.current()<0:
@@ -279,6 +332,13 @@ class EasyMTRui:
 
 
     def start_recording(self):
+        """
+        Starts the audio recording in a separate thread.
+
+        This method initializes the audio recording process by creating a new
+        thread that runs the `record_loop` function from the `recorder` module.
+        It also logs the start of the recording process.
+        """
 
         audiodevice=self.all_audio_devices[self.devicechoosen.current()]
       

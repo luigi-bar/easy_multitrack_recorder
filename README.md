@@ -6,7 +6,7 @@
 
 If you want a simple no-fuss program to record your multi-track audio interface or mixer, this is the tool for you!
 
-You can use it for example with the Behringer XR 18 or similar mixers, to record your live performances, etc. 
+You can use it for example with the Behringer XR 18 or similar mixers, to record your live performances, etc. It supports ASIO, MME, etc on Linux , Windows
 
 It displays the levels of the various channels in realtime, to help you troubleshooting connection and/or gain issues.
 
