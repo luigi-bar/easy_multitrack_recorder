@@ -37,9 +37,12 @@ jobs:
           $now = Get-Date -Format yyyy-MM-dd
           echo ("RELEASE_DATE=" + $now) >> $env:GITHUB_ENV
 
+
+      ## The list of all available versions can be found here: https://raw.githubusercontent.com/actions/python-versions/main/versions-manifest.json
+      ## latest 3.7 for windows: 3.7.9
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.7.17"
+          python-version: "3.7.9"
 
       # - uses: pypa/gh-action-pip-audit@v1.1.0
       #   with:
