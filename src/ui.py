@@ -63,7 +63,7 @@ class EasyMTRui:
         logoframe=tk.Frame(self.window)
         logoframe.grid(row=1,column=0, columnspan=10) 
 
-        ttk.Label(logoframe, text="EASY MULTITRACK RECORDER",   font=('TkFixedFont',20)).grid(
+        ttk.Label(logoframe, text="EASY MULTITRACK RECORDER v.@RELEASE@",   font=('TkFixedFont',20)).grid(
             row=1, column=2, padx=self.padding, pady=0
         )
         ttk.Label(logoframe, text='  '.join("multitrack recording made simple"),   font=('TkFixedFont',8)).grid(
@@ -72,6 +72,7 @@ class EasyMTRui:
         self.imgw =  tk.PhotoImage(file=self.getasset("assets/logowave.png"))
         ttk.Label(logoframe, text='aaa', image = self.imgw).grid(
             row=1, column=0, padx=(self.padding,0), pady=0, rowspan=2)
+
 
         # Device: label
         ttk.Label(self.window, text="Device:",   font='TkFixedFont').grid(
