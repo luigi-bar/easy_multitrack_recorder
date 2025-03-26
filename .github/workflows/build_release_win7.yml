@@ -1,0 +1,73 @@
+name: release
+
+permissions:
+  contents: write
+
+on:
+  push:
+    branches:
+      - "main"
+
+  workflow_dispatch:
+
+jobs:
+  build_release:
+
+    name: build_release for win7
+    runs-on: windows-2019
+
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: set release date
+        shell: bash
+        run: |
+          echo "RELEASE_DATE=$(date --rfc-3339=date)" >> ${GITHUB_ENV}
+
+      - name: install custom py
+        shell: bash
+        run: |
+          #wget https://github.com/adang1345/PythonWin7/raw/refs/heads/master/3.10.16/python-3.10.16-amd64-full.exe
+          wget https://github.com/adang1345/PythonWin7/raw/refs/heads/master/3.10.16/python-3.10.16-embed-amd64.zip
+          unzip python-3.10.16-embed-amd64.zip
+
+      - uses: pypa/gh-action-pip-audit@v1.1.0
+        with:
+          inputs: requirements.txt
+          local: true
+
+      - name: Build
+        shell: bash
+        run: |
+          python -m venv easy_mtr
+
+          easy_mtr/Scripts/activate
+          python -m pip install -r requirements.txt 
+          
+          cd src
+          pyinstaller -F easy_multitrack_recorder.py --add-data "assets/*:assets" --icon "assets/icon.ico" -n easy_multitrack_recorder_${{ runner.os}}Legacy
+
+      # - name: Build windows
+      #   if: ${{ runner.os == 'Windows' }}
+      #   shell: bash
+      #   run: |
+      #     python -m venv easy_mtr
+      #     easy_mtr/Scripts/activate
+      #     python -m pip install -r requirements.txt
+          
+      #     cd src
+
+      #     echo 'ora find'
+      #     find ../ -iname "*.tcl"
+
+      #     pyinstaller -F easy_multitrack_recorder.py --add-data "assets/*;assets" --icon "assets/icon.ico"   -n easy_multitrack_recorder_${{ runner.os}}
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: EasyMultitrackRecorder ${{ runner.os }}Legacy
+          tag_name: ${{ runner.os }}Legacy.${{ env.RELEASE_DATE }}
+          files: src/dist/*
