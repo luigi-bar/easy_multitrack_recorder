@@ -14,8 +14,7 @@ jobs:
   build_release:
     strategy:
       matrix:
-        #os: [ubuntu-20.04, windows-2019]
-        os: [windows-2019]
+        os: [ubuntu-latest, windows-latest]
 
     name: build_release for ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
@@ -32,11 +31,9 @@ jobs:
           echo "RELEASE_DATE=$(date --rfc-3339=date)" >> ${GITHUB_ENV}
 
       ## The list of all available versions can be found here: https://raw.githubusercontent.com/actions/python-versions/main/versions-manifest.json
-      ## latest 3.7 for windows: 3.7.9
       - uses: actions/setup-python@v5
         with:
-#          python-version: "3.7.9"
-          python-version: "pypy3.10"
+          python-version: "<4"
 
       # - uses: pypa/gh-action-pip-audit@v1.1.0
       #   with:
@@ -44,7 +41,7 @@ jobs:
       #     local: true
 
       - name: Build non windows
-        if: ${{ runner.os != 'Windows' }}
+#        if: ${{ runner.os != 'Windows' }}
         shell: bash
         run: |
           python -m venv easy_mtr
@@ -54,20 +51,20 @@ jobs:
           cd src
           pyinstaller -F easy_multitrack_recorder.py --add-data "assets/*:assets" --icon "assets/icon.ico" -n easy_multitrack_recorder_${{ runner.os}}
 
-      - name: Build windows
-        if: ${{ runner.os == 'Windows' }}
-        shell: bash
-        run: |
-          python -m venv easy_mtr
-          easy_mtr/Scripts/activate
-          python -m pip install -r requirements.txt
+      # - name: Build windows
+      #   if: ${{ runner.os == 'Windows' }}
+      #   shell: bash
+      #   run: |
+      #     python -m venv easy_mtr
+      #     easy_mtr/Scripts/activate
+      #     python -m pip install -r requirements.txt
           
-          cd src
+      #     cd src
 
-          echo 'ora find'
-          find ../ -iname "*.tcl"
+      #     echo 'ora find'
+      #     find ../ -iname "*.tcl"
 
-          pyinstaller -F easy_multitrack_recorder.py --add-data "assets/*;assets" --icon "assets/icon.ico"   -n easy_multitrack_recorder_${{ runner.os}}
+      #     pyinstaller -F easy_multitrack_recorder.py --add-data "assets/*;assets" --icon "assets/icon.ico"   -n easy_multitrack_recorder_${{ runner.os}}
 
       - name: Release
         uses: softprops/action-gh-release@v2
