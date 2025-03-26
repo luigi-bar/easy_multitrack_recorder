@@ -66,7 +66,7 @@ jobs:
         shell: bash
         run: |
           python -m venv easy_mtr
-          easy_mtr\Scripts\activate
+           . easy_mtr/bin/activate
           python -m pip install -r requirements.txt
           
           cd src
