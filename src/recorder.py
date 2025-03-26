@@ -44,7 +44,7 @@ def record_loop(device , filename, channels):
                             channels=channels, callback=audioqueue_callback):
             while True:
                 msg=audioqueue.get()
-                print(msg.shape)
+                
                 if isinstance(msg,str):
                     if msg=='stop': 
                         break
