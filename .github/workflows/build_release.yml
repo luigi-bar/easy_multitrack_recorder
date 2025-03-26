@@ -60,6 +60,6 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          name: ${{ runnner.os }}
+          name: ${{ runner.os }}
           tag_name: v.${{ env.NOW }}
           files: src/dist/*
