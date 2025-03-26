@@ -39,4 +39,5 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           name: linux
+          tag_name: ${{ github.ref }}
           files: src/dist/*
