@@ -57,7 +57,7 @@ The app is written in python, and it is using:
 - sv-ttk for a nice ui style
 - pyinstaller to pack it all in single executable
 
-A note on Win7: since it is EOL, the build needs some hacks, and this is the reason for a dedicated GitHub action and a different release
+A note on Win7: since it is EOL, we are forced to use an old python version, old packages.. The build needs some hacks, and this is the reason for a dedicated GitHub action and a different release
 
 ## how to run from source
 

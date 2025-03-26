@@ -56,14 +56,9 @@ jobs:
           easy_mtr/Scripts/activate
 
           python -m pip install -r requirements.txt 
-          
-          
-          git clone https://github.com/rdbende/Sun-Valley-ttk-theme.git
+              
           cd src
-          
-          
-
-          pyinstaller -F easy_multitrack_recorder.py --add-data "assets/*;assets" --add-data "../Sun-Valley-ttk-theme/sv_ttk;." --icon "assets/icon.ico" -n easy_multitrack_recorder_${{ runner.os}}Legacy
+          pyinstaller -F easy_multitrack_recorder.py --add-data "assets/*;assets" --icon "assets/icon.ico" --collect-data sv-ttk  -n easy_multitrack_recorder_${{ runner.os}}Legacy
 
       - name: Release
         uses: softprops/action-gh-release@v2
