@@ -31,11 +31,15 @@ jobs:
       #   run:  |
       #     Get-Package "*python*" | Uninstall-Package
 
-      - name: install custom py
-        shell: bash
-        run: |
-          curl -kLSs https://github.com/adang1345/PythonWin7/raw/refs/heads/master/3.10.16/python-3.10.16-embed-amd64.zip -o python.zip
-          unzip python.zip
+      # - name: install custom py
+      #   shell: bash
+      #   run: |
+      #     curl -kLSs https://github.com/adang1345/PythonWin7/raw/refs/heads/master/3.10.16/python-3.10.16-embed-amd64.zip -o python.zip
+      #     unzip python.zip
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.7"
 
       # - name: pip audit
       #   shell: bash
