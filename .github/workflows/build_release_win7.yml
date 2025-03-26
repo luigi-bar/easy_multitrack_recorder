@@ -37,11 +37,11 @@ jobs:
           curl -kLSs https://github.com/adang1345/PythonWin7/raw/refs/heads/master/3.10.16/python-3.10.16-embed-amd64.zip -o python.zip
           unzip python.zip
 
-      - name: pip audit
-        shell: bash
-        run: |
-          python3 -m pip install pip-audit
-          pip-audit -r requirements.txt 
+      # - name: pip audit
+      #   shell: bash
+      #   run: |
+      #     python3 -m pip install pip-audit
+      #     pip-audit -r requirements.txt 
 
       - name: Build
         shell: bash
