@@ -28,26 +28,31 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.10' 
+      # - uses: actions/setup-python@v5
+      #   with:
+      #     python-version: '3.10' 
 
-      - uses: pypa/gh-action-pip-audit@v1.1.0 
-        with:
-          inputs: requirements.txt
-          local: true
+      # - uses: pypa/gh-action-pip-audit@v1.1.0 
+      #   with:
+      #     inputs: requirements.txt
+      #     local: true
 
-      - run: |
-          python -m venv easy_mtr
-          . easy_mtr/bin/activate
-          python -m pip install -r requirements.txt
-          cd src
-          pyinstaller -F easy_multitrack_recorder.py --add-data "assets/*:assets" --icon "assets/icon.ico"
+      # - run: |
+      #     python -m venv easy_mtr
+      #     . easy_mtr/bin/activate
+      #     python -m pip install -r requirements.txt
+      #     cd src
+      #     pyinstaller -F easy_multitrack_recorder.py --add-data "assets/*:assets" --icon "assets/icon.ico"
   
+      - name: test
+        run: |
+          echo now is $NOW
+
 
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
           name: linux
           tag_name: ${{env.NOW }}
-          files: src/dist/*
+          #files: src/dist/*
+          files: requirements.txt
