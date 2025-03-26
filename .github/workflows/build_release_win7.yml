@@ -46,9 +46,9 @@ jobs:
       - name: Build
         shell: bash
         run: |
-          python -m venv easy_mtr
+         # python -m venv easy_mtr
 
-          easy_mtr/Scripts/activate
+         # easy_mtr/Scripts/activate
           python -m pip install -r requirements.txt 
           
           cd src
