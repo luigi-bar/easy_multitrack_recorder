@@ -22,5 +22,6 @@ logging.basicConfig(
 if __name__ == "__main__":
     logging.info("EASY MULTITRACK RECORDING Starting")
     ui = EasyMTRui()
+    
     sv_ttk.set_theme("dark")
     ui.mainloop()
