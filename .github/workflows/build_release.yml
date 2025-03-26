@@ -25,10 +25,18 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: set release date
+      - name: set release date (non windows)
+        if: ${{ matrix.os != 'windows-latest' }}
         run: |
           echo "RELEASE_DATE=$(date --rfc-3339=date)" >> ${GITHUB_ENV}
 
+      - name: set release date (windows)
+        if: ${{ matrix.os == 'windows-latest' }}
+        run: |
+          chcp 65001 #set code page to utf-8
+          $now = Get-Date -Format yyyy-MM-dd
+          echo ("RELEASE_DATE=" + $now) >> $env:GITHUB_ENV
+          
       - uses: actions/setup-python@v5
         with:
           python-version: "3.10"
