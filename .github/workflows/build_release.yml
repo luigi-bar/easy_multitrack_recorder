@@ -64,7 +64,7 @@ jobs:
           python -m pip install -r requirements.txt
           
           cd src
-          pyinstaller -F easy_multitrack_recorder.py --add-data "assets/*;assets" --icon "assets/icon.ico" -n easy_multitrack_recorder_${{ runner.os}}
+          pyinstaller -F easy_multitrack_recorder.py --add-data "assets/*;assets" --icon "assets/icon.ico"  -n easy_multitrack_recorder_${{ runner.os}}
 
       - name: Release
         uses: softprops/action-gh-release@v2
