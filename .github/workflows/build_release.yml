@@ -62,5 +62,5 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           name: EasyMultitrackRecorder
-          tag_name: EasyMultitrackRecorder ${{ runner.os }} ${{ env.RELEASE_DATE }}
+          tag_name: ${{ runner.os }}.${{ env.RELEASE_DATE }}
           files: src/dist/*
