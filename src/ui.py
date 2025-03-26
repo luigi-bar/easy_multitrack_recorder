@@ -203,7 +203,7 @@ class EasyMTRui:
                 out += f"{ch+1:3} "
                 out += '║ '
 
-                levelDB=20*math.log10(max(random.random()/3,1e-6))
+                levelDB=20*math.log10(max(audiovus[ch],1e-6))
 
                 ## mapping db -> vu ticks:
                 level=int(levelDB/2+22)
