@@ -12,49 +12,54 @@ on:
 
 jobs:
   build_release:
-    name: build_release
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    name: build_release for ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
 
     timeout-minutes: 20
 
     steps:
-    
-
-
       - name: Checkout Code
         uses: actions/checkout@v4
 
-
       - name: set NOW
         run: |
-          echo "NOW=$(date +'%Y.%m%d.%H%M%S')" >> "$GITHUB_ENV"
+          echo "NOW=$(date +'%Y.%m%d.%H%M')" >> "$GITHUB_ENV"
           sed -i s/@RELEASE@/$NOW/g src/*py
 
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.10' 
+          python-version: "3.10"
 
-      - uses: pypa/gh-action-pip-audit@v1.1.0 
+      - uses: pypa/gh-action-pip-audit@v1.1.0
         with:
           inputs: requirements.txt
           local: true
 
-      - run: |
+      - name: Build non windows
+        if: ${{ matrix.os != 'windows-latest' }}
+        run: |
           python -m venv easy_mtr
           . easy_mtr/bin/activate
           python -m pip install -r requirements.txt
           cd src
           pyinstaller -F easy_multitrack_recorder.py --add-data "assets/*:assets" --icon "assets/icon.ico"
-  
-      - name: test
-        run: |
-          echo now is $NOW
 
+      - name: Build windows
+        if: ${{ matrix.os == 'windows-latest' }}
+        run: |
+          python -m venv easy_mtr
+          easy_mtr\Scripts\activate
+          python -m pip install -r requirements.txt
+          cd src
+          pyinstaller -F easy_multitrack_recorder.py --add-data "assets/*:assets" --icon "assets/icon.ico"
 
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          name: linux
+          name: ${{ runnner.os }}
           tag_name: v.${{ env.NOW }}
-          #files: src/dist/*
-          files: requirements.txt
+          files: src/dist/*
