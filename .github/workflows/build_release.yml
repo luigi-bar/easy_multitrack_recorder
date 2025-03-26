@@ -53,6 +53,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           name: linux
-          tag_name: ${{env.NOW }}
+          tag: ${{ env.NOW }}
           #files: src/dist/*
           files: requirements.txt
