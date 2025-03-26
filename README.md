@@ -37,9 +37,18 @@ When done, click the button again to stop. In the same folder where the app is l
 
 # how to download / install 
 
+Easy MultiTrack Recorder is distributed as a single file (easy no?).
+
+Go the the Releases page https://github.com/luigi-bar/easy_multitrack_recorder/releases and and download your needed version.
+
+Requirements:
+- Linux: any Ubuntu 20.04 or later (or compatible)
+- Windows: Win7  or later
 
 
-# for developers
+# For developers
+
+Nice to see you here - do you have a Mac maybe to help me in testing?
 
 ## how to run from source
 

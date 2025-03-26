@@ -1,5 +1,5 @@
 sounddevice<1.0
 soundfile<1.0
-pyinstaller>=6.0
+pyinstaller<7.0
 sv-ttk<3.0
 psutil<8.0
