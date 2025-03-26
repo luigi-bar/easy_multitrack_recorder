@@ -48,7 +48,16 @@ Requirements:
 
 # For developers
 
-Nice to see you here - do you have a Mac maybe to help me in testing?
+Nice to see you here! - do you have a Mac maybe to help me in testing?
+
+The app is written in python, and it is using:
+- sounddevice to access all devices (including ASIO on Windows)
+- soundfile to save on files
+- tkinter for the ui
+- sv-ttk for a nice ui style
+- pyinstaller to pack it all in single executable
+
+A note on Win7: since it is EOL, the build needs some hacks, and this is the reason for a dedicated GitHub action and a different release
 
 ## how to run from source
 

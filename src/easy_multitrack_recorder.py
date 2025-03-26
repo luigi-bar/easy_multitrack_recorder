@@ -23,5 +23,9 @@ if __name__ == "__main__":
     logging.info("EASY MULTITRACK RECORDING Starting")
     ui = EasyMTRui()
     
-    sv_ttk.set_theme("dark")
+    try:
+        sv_ttk.set_theme("dark")
+    except:
+        pass
+
     ui.mainloop()

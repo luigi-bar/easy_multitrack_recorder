@@ -57,10 +57,13 @@ jobs:
 
           python -m pip install -r requirements.txt 
           
-          find . -iname "*tcl"
-
+          
+          git clone https://github.com/rdbende/Sun-Valley-ttk-theme.git
           cd src
-          pyinstaller -F easy_multitrack_recorder.py --add-data "assets/*;assets" --add-data "api-ms-win-core-path-l1-1-0.dll;." --icon "assets/icon.ico" -n easy_multitrack_recorder_${{ runner.os}}Legacy
+          
+          
+
+          pyinstaller -F easy_multitrack_recorder.py --add-data "assets/*;assets" --add-data "../Sun-Valley-ttk-theme/sv_ttk;." --icon "assets/icon.ico" -n easy_multitrack_recorder_${{ runner.os}}Legacy
 
       - name: Release
         uses: softprops/action-gh-release@v2
