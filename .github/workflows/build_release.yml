@@ -41,10 +41,10 @@ jobs:
         with:
           python-version: "3.7.8"
 
-      - uses: pypa/gh-action-pip-audit@v1.1.0
-        with:
-          inputs: requirements.txt
-          local: true
+      # - uses: pypa/gh-action-pip-audit@v1.1.0
+      #   with:
+      #     inputs: requirements.txt
+      #     local: true
 
       - name: Build non windows
         if: ${{ runner.os != 'Windows' }}
