@@ -6,7 +6,7 @@
 
 If you want a simple no-fuss program to record your multi-track audio interface or mixer, this is the tool for you!
 
-You can use it for example with the Behringer XR 18 or similar mixers, to record your live performances, etc. It supports ASIO, MME, etc on Linux , Windows
+You can use it for example with the Behringer XR 18 or similar mixers, to record your live performances, etc. It supports ASIO, MME, etc on Linux , Windows, MacOS (untested)
 
 It displays the levels of the various channels in realtime, to help you troubleshooting connection and/or gain issues.
 
@@ -39,11 +39,18 @@ When done, click the button again to stop. In the same folder where the app is l
 
 Easy MultiTrack Recorder is distributed as a single file (easy no?).
 
-Go the the Releases page https://github.com/luigi-bar/easy_multitrack_recorder/releases and and download your needed version.
+Go the the Releases page https://github.com/luigi-bar/easy_multitrack_recorder/releases ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/luigi-bar/easy_multitrack_recorder/total) 
+ and and download your needed version.
 
-Requirements:
-- Linux: any Ubuntu 20.04 or later (or compatible)
-- Windows: Win7  or later
+## Supported Operating Systems
+
+| Operating System |Status| Supported Versions | Notes |
+|---|---|---|---|
+| Linux |![GitHub Release](https://img.shields.io/github/v/release/luigi-bar/easy_multitrack_recorder?filter=Linux.*) |Ubuntu 20.04 or later (or compatible) |  |
+| Windows |![GitHub Release](https://img.shields.io/github/v/release/luigi-bar/easy_multitrack_recorder?filter=Windows.*) |Win10 or later |  |
+|  |![GitHub Release](https://img.shields.io/github/v/release/luigi-bar/easy_multitrack_recorder?filter=WindowsLegacy.*) |Win7 or later | "legacy" build (not recommended) |
+| macOS|![GitHub Release](https://img.shields.io/github/v/release/luigi-bar/easy_multitrack_recorder?filter=macos.*) | Any? |  Testing needed |
+
 
 
 # For developers
