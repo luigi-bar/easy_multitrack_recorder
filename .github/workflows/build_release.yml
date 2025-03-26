@@ -45,7 +45,12 @@ jobs:
         shell: bash
         run: |
           python -m venv easy_mtr
-          . easy_mtr/bin/activate
+
+          if [ "${{runner.os}}" != "Windows" ]; then
+            . easy_mtr/bin/activate
+          else
+            easy_mtr/Scripts/activate
+          fi
           python -m pip install -r requirements.txt 
           
           cd src
