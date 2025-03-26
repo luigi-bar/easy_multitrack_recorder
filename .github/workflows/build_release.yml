@@ -21,7 +21,8 @@ jobs:
     
       - name: set NOW
         run: |
-          echo "::set-env name=NOW::$(date +'%Y-%m-%dT%H:%M:%S')"
+          echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> "$GITHUB_ENV"
+
 
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -47,5 +48,5 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           name: linux
-          tag_name: ${{ env.NOW }}
+          tag_name: $NOW
           files: src/dist/*
