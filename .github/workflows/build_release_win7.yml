@@ -56,7 +56,7 @@ jobs:
           easy_mtr/Scripts/activate
 
           echo "... finding dll..."
-          find c: -iname "api-ms-win-core-path-l1-1-0.dll"
+          find c:\\ -iname "api-ms-win-core-path-l1-1-0.dll"
 
           python -m pip install -r requirements.txt 
           
