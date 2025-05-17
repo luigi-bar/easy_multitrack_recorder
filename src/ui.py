@@ -1,5 +1,6 @@
 from audiodevice import AudioDevice
 import sys
+import sv_ttk
 import logging
 import math
 from threading import Thread
@@ -22,8 +23,9 @@ class EasyMTRui:
 
     def __init__(self):
         self.window = tk.Tk()
-#        self.window.configure(background='#1c1c1c')
         
+        self.set_style()
+
         self.window.title("EASY MULTITRACK RECORDER")
         self.all_audio_devices = AudioDevice.query_devices()
         self.recording_start = None
@@ -36,6 +38,7 @@ class EasyMTRui:
 
         self.create_ui()
         self.window.bind("<Destroy>", self.on_destroy)
+
     
     def on_destroy(self,event):
         if event.widget.winfo_parent() == "":
@@ -83,11 +86,13 @@ class EasyMTRui:
         This method sets up the layout, widgets, and initial state of the UI.
         """
 
+        
+
         ## nice logo
-        logoframe=tk.Frame(self.window, background='black')
+        logoframe=tk.Frame(self.window)
         logoframe.grid(row=1,column=0, columnspan=10) 
 
-        ttk.Label(logoframe, text="EASY MULTITRACK RECORDER",   font=('TkFixedFont',20), background='black', foreground='white').grid(
+        ttk.Label(logoframe, text="EASY MULTITRACK RECORDER",   font=('TkFixedFont',20)).grid(
             row=1, column=2, padx=self.padding, pady=0
         )
         ttk.Label(logoframe, text='  '.join("multitrack recording made simple"),   font=('TkFixedFont',8)).grid(
@@ -99,7 +104,7 @@ class EasyMTRui:
 
 
         # Device: label
-        ttk.Label(self.window, text="Device:",   font='TkFixedFont', background='black', foreground='white').grid(
+        ttk.Label(self.window, text="Device:",   font='TkFixedFont' ).grid(
             row=5, column=0, padx=self.padding, pady=self.padding
         )
 
@@ -126,27 +131,27 @@ class EasyMTRui:
             row=5, column=40, padx=self.padding, pady=self.padding, columnspan=2)
 
         ## vumeters
-        vuframe=tk.Frame(self.window, background='black')
+        vuframe=tk.Frame(self.window)
         vuframe.grid(row=21,column=1)
 
-        self.levels=ttk.Label(vuframe, text="",  font='TkFixedFont', background='black', foreground='white')
+        self.levels=ttk.Label(vuframe, text="",  font='TkFixedFont')
         self.levels.grid(
             row=21, column=1, padx=0, pady=self.padding
         )
-        self.levelsY=ttk.Label(vuframe, text="",  font='TkFixedFont', foreground='#F80', background='black')
+        self.levelsY=ttk.Label(vuframe, text="",  font='TkFixedFont', foreground='#F80')
         self.levelsY.grid(
             row=21, column=2, padx=0, pady=self.padding
         )
         
-        self.levelsR=ttk.Label(vuframe, text="",  font='TkFixedFont', foreground='#F00', background='black')
+        self.levelsR=ttk.Label(vuframe, text="",  font='TkFixedFont', foreground='#F00')
         self.levelsR.grid(
             row=21, column=3, padx=0, pady=self.padding
         )
-        self.levelsEND=ttk.Label(vuframe, text="",  font='TkFixedFont', background='black', foreground='white')
+        self.levelsEND=ttk.Label(vuframe, text="",  font='TkFixedFont')
         self.levelsEND.grid(
             row=21, column=4, padx=0, pady=self.padding
         )
-        self.recinfo_label = ttk.Label(self.window, text="",  font='TkFixedFont', background='black', foreground='white')
+        self.recinfo_label = ttk.Label(self.window, text="",  font='TkFixedFont')
         self.recinfo_label.grid(
             row=21, column=2, padx=self.padding, pady=self.padding)
         
@@ -350,3 +355,15 @@ class EasyMTRui:
 
         thread = Thread(target = recorder.record_loop, args = (audiodevice.audio_device_id, self.filename, audiodevice.max_input_channels, ))
         thread.start()
+
+
+    def set_style(self):
+        ## some nice defaults...
+        self.window.option_add("*ackgroun*", "#1c1c1c")
+        self.window.option_add("*oregroun*", "white")
+
+        ## the real theme
+        try:
+            sv_ttk.set_theme("dark")
+        except Exception as e:
+            logging.error(f"ERROR setting style: {e}")
